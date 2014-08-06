@@ -22,22 +22,44 @@ SlashAttack.Game = function (game) {
 
     //	You can use any of these from any function within this State.
     //	But do consider them as being 'reserved words', i.e. don't create a property for your own game called "world" or you'll over-write the world reference.
-
+    this.map;
+    this.layer;
+    this.cursors;
 };
 
 SlashAttack.Game.prototype = {
 
 	create: function () {
 
-		//	Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
+        this.map = this.game.add.tilemap('map',16,16);
+        this.map.addTilesetImage('tiles');
 
+        this.layer = this.map.createLayer(0);
+        this.layer.resizeWorld();
+        this.cursors = this.game.input.keyboard.createCursorKeys();
 	},
 
 	update: function () {
 
-		//	Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
+ if (this.cursors.left.isDown)
+    {
+        this.game.camera.x -= 4;
+    }
+    else if (this.cursors.right.isDown)
+    {
+        this.game.camera.x += 4;
+    }
 
-	},
+    if (this.cursors.up.isDown)
+    {
+        this.game.camera.y -= 4;
+    }
+    else if (this.cursors.down.isDown)
+    {
+        this.game.camera.y += 4;
+    }
+
+},
 
 	quitGame: function (pointer) {
 
